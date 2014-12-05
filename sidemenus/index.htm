@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>demo</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<meta http-equiv="Content-type" content="textml;charset=UTF-8" /> 
+	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+	<style type="text/css">
+		.links {position: fixed; right: 0;top: 100px;}
+		.links a{width: 100px;display: block;padding: 10px 20px;background-color: #ececec;font-size: 12px;color: #369;margin: 5px 0;position: relative;right: -100px;text-decoration: none;}
+		.nav{overflow: hidden;}
+		.links a:hover{background-color: #369;color: #fff;}
+		.nav > li {display: block;padding: 5px 10px;float: left;}
+		.subnav{opacity: 0.2;}
+		.left{float: left;width:300px;height: 300px;background-color: #369;}
+		.middle{margin-left: 300px;margin-right: 200px;height: 600px;background-color: #999;}
+		.right{width:200px;height: 500px;background-color: green;float: right;}
+	</style>
+</head>
+<body>
+	<div class="links">
+		<a id="num1" href="javascript://">回到顶部</a>
+		<a id="num2" href="javascript://">书签切换</a>
+		<a id="num3" href="javascript://">幻灯片</a>
+		<a id="num4" href="javascript://">图片无缝滚动</a>
+		<a id="num5" href="javascript://">图片滚动-上</a>
+		<a id="num6" href="javascript://">图片滚动-下</a>
+		<a id="num7" href="javascript://">文字滚动-上</a>
+		<a id="num8" href="javascript://">文字滚动-下</a>
+
+	<script type="text/javascript">
+
+		$('.links').hover(function() {
+			var $this = $(this);
+			var aTags = $this.find('a');
+			t1 = setTimeout(function() {
+				aTags.each(function(i) {
+					var aTag = $(this);
+					setTimeout(function() {	aTag.animate({right: '0'}, 200)}, 80*i);
+				})
+			}, 200)
+		}, function() {
+			if(t1) {
+				clearTimeout(t1);
+			}
+			$(this).find('a').each(function(i) {
+				var aTag = $(this);
+				setTimeout(function() {aTag.animate({right: '-100px'}, 200)}, 80*i);
+			})
+		});
+
+		var t2,t3;
+		$('.nav > li').hover(function() {
+			var $this = $(this);
+			t2 = setTimeout(function() {$this.find('.subnav').animate({opacity: '1'}, function(){
+				clearTimeout(t2);
+			})}, 100);
+		},function() {
+			var $this = $(this);
+			setTimeout(function() {$this.find('.subnav').animate({opacity: '0.2'})}, 100)
+		});
+	</script>
+</body>
+</html>
